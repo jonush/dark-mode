@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import ReactDOM from "react-dom";
 import axios from "axios";
 
 import Charts from "./components/Charts";
 import Navbar from "./components/Navbar";
+import SignUp from './components/SignUp';
+import Login from './components/Login';
+import Max from './Max';
 
 import "./styles.scss";
 
@@ -21,10 +26,23 @@ const App = () => {
   return (
     <div className="App">
       <Navbar />
-      <Charts coinData={coinData} />
+
+      <Route path='/login'>
+        <Login />
+      </Route>
+
+      <Route path='/signup'>
+        <SignUp />
+      </Route>
+
+      <Route exact path='/'>
+        <Max />
+        <Charts coinData={coinData} />
+      </Route>
+      
     </div>
   );
 };
 
 const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
+ReactDOM.render(<Router><App /></Router>, rootElement);
